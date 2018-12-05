@@ -8,7 +8,7 @@ This cookbook uses package `s3cmd` to actually upload gzipped log files that hav
 
 First we must configure `s3cmd` so that it has access to S3:
 
-### `logrotate_s3_config`0
+### `logrotate_s3_config`
 
 ```ruby
 logrotate_s3_config '/etc/logrotate-s3.conf' do
