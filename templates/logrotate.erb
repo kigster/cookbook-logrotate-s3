@@ -1,0 +1,28 @@
+<%- Array(@resource.log_pattern).each do |pattern| %>
+<%= @resource.log_dir %>/<%= pattern %>
+<%- end %>
+{
+  <%= @resource.frequency %>
+  <%= @log_config %>
+  maxsize <%= @resource.maxsize %>
+  rotate <%= @resource.rotate %>
+  <%- if @resource.s3_upload_enabled %>
+  lastaction
+    HOSTNAME=`hostname`
+    <%- Array(@resource.log_pattern).each do |pattern| %>
+    /bin/gzip --fast <%= @resource.log_dir %>/<%= pattern %>.[0-9]*.[0-9]*
+    <%- end %>
+    /usr/bin/s3cmd sync --config=<%= @resource.s3_config %> <%= @resource.log_dir %>/*.gz "s3://<%= @resource.s3_bucket %>/<%= @resource.s3_folder %>/<%= @resource.log_name %>/" && rm -f <%= @resource.log_dir %>/*.gz
+    <%= @resource.last_action if @resource.last_action %>
+  endscript
+  <%- elsif @resource.last_action %>
+  lastaction
+    <%= @resource.last_action %>
+  endscript
+  <%- end %>
+  <%- if @resource.postrotate %>
+  postrotate
+    <%= @resource.postrotate %>
+  endscript
+  <%- end %>
+}
