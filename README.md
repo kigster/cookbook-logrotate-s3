@@ -1,4 +1,6 @@
-# logrotate
+# Cookbook `logrotate-s3` 
+
+This cookbook offers two custom resources that can be used to configure S3 access, and then setup log rotation for any number of log files.
 
 Installs S3 upload script, and offers reusable resource for adding logs to the rotate schedule.
 
