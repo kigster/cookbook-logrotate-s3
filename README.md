@@ -1,6 +1,10 @@
+[![Build Status](https://travis-ci.org/kigster/cookbook-logrotate-s3.svg?branch=master)](https://travis-ci.org/kigster/cookbook-logrotate-s3)
+
 # Cookbook `logrotate-s3` 
 
 This cookbook offers two custom resources that can be used to configure S3 access, and then setup log rotation for any number of log files.
+
+# logrotate
 
 Installs S3 upload script, and offers reusable resource for adding logs to the rotate schedule.
 
@@ -39,4 +43,16 @@ Note that the actual location on S3 will be constructed as
 ```
   s3//{{ s3_bucket }}/{{ s3_folder or chef environment }}/nginx/logfile.gz
 ```  
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at [https://github.com/kigster/cookbook-logrotate-s3](https://github.com/kigster/cookbook-logrotate-s3).
+
+## License
+
+&copy; 2018 Konstantin Gredeskoul, All rights reserved. MIT License.
+
+## Acknowledgements
+
+ * Jordan Brown @ Homebase
 
