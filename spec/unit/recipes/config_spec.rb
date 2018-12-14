@@ -6,7 +6,7 @@
 
 require 'spec_helper'
 
-describe 'logrotate-s3::default' do
+describe 'logrotate-s3::config' do
   let(:environment) { 'staging' }
   let(:chef_run) do
     # for a complete list of available platforms and versions see:
@@ -16,19 +16,19 @@ describe 'logrotate-s3::default' do
       server.create_environment(environment)
       node.chef_environment = environment
 
+      node.normal['logrotate-s3']['enabled']     = true
       node.normal['logrotate-s3']['config_file'] = '/tmp/foo.config'
-      node.normal['logrotate-s3']['aws_region']  = 'us-east-2'
-      node.normal['logrotate-s3']['access_key']  = 'XXXX'
-      node.normal['logrotate-s3']['secret_key']  = 'YYYY'
+      node.normal['logrotate-s3']['aws_region']  = 'us-east-1'
+      node.normal['logrotate-s3']['access_key']  = 'AAA'
+      node.normal['logrotate-s3']['secret_key']  = 'BBB'
+      node.normal['logrotate-s3']['bucket']      = 'logs-rotated'
+      node.normal['logrotate-s3']['folder']      = '/'
 
       node.normal['org'] = 'dev'
     end
 
     runner.converge(described_recipe)
   end
-
-  step_into :logrotate_s3_file
-  step_into :logrotate_s3_config
 
   before do
     stub_command('test -d /tmp').and_return(true)

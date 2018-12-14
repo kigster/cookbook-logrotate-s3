@@ -11,7 +11,9 @@ module LogrotateS3Cookbook
 
     action :run do
       resource = new_resource
-      config_dir = ::FileUtils.mkdir_p(::File.dirname(resource.config_file))
+      config_dir = ::File.dirname(resource.config_file)
+
+      directory config_dir
 
       if resource.enabled && config_dir
         package 's3cmd'

@@ -51,10 +51,7 @@ module LogrotateS3Cookbook
           node_name:  node.name
       }
 
-      directory resource.logrotate_config_dir do
-        action :create
-        not_if "test -d #{resource.logrotate_config_dir}"
-      end
+      directory resource.logrotate_config_dir
 
       # logrotate complains if the directory is world writeable
       directory resource.log_dir do
@@ -66,7 +63,6 @@ module LogrotateS3Cookbook
         source 'logrotate.erb'
         cookbook 'logrotate-s3'
         variables(**arguments)
-        only_if { ::Dir.exist?(resource.log_dir) }
       end
     end
   end

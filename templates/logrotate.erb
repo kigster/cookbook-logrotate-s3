@@ -6,7 +6,7 @@
   <%= @log_config %>
   maxsize <%= @resource.maxsize %>
   rotate <%= @resource.rotate %>
-  <%- if @resource.s3_upload_enabled %>
+  <%- if @resource.upload_to_s3 %>
   lastaction
     HOSTNAME=`hostname`
     <%- Array(@resource.log_pattern).each do |pattern| %>
