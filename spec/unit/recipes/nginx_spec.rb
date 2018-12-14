@@ -16,21 +16,19 @@ describe 'logrotate-s3::nginx' do
     runner = ChefSpec::ServerRunner.new(step_into: %w(logrotate_s3_file logrotate_s3_config),
                                         platform:  'ubuntu', version: '18.04') do |node, server|
       server.create_environment(environment)
-      server.node.chef_environment = environment
+      node.chef_environment = environment
 
-      server.node.override['logrotate-s3']['enabled']     = true
-      server.node.override['logrotate-s3']['config_file'] = '/tmp/foo.config'
-      server.node.override['logrotate-s3']['aws_region']  = 'us-east-1'
-      server.node.override['logrotate-s3']['access_key']  = 'AAA'
-      server.node.override['logrotate-s3']['secret_key']  = 'BBB'
-      server.node.override['logrotate-s3']['bucket']      = 'logs-rotated'
-      server.node.override['logrotate-s3']['folder']      = '/'
-
-
-      server.node.override['logrotate-s3']['nginx']['enabled']              = true
-      server.node.override['logrotate-s3']['nginx']['log_dir']              = log_dir
-      server.node.override['logrotate-s3']['nginx']['logrotate_config_dir'] = config_dir
-      server.node.override['org']                                           = 'dev'
+      node.override['logrotate-s3']['enabled']                       = true
+      node.override['logrotate-s3']['config_file']                   = '/tmp/foo.config'
+      node.override['logrotate-s3']['aws_region']                    = 'us-east-1'
+      node.override['logrotate-s3']['access_key']                    = 'AAA'
+      node.override['logrotate-s3']['secret_key']                    = 'BBB'
+      node.override['logrotate-s3']['bucket']                        = 'logs-rotated'
+      node.override['logrotate-s3']['folder']                        = '/'
+      node.override['logrotate-s3']['nginx']['enabled']              = true
+      node.override['logrotate-s3']['nginx']['log_dir']              = log_dir
+      node.override['logrotate-s3']['nginx']['logrotate_config_dir'] = config_dir
+      node.override['org']                                           = 'dev'
     end
 
     runner.converge(described_recipe)

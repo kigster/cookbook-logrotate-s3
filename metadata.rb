@@ -16,6 +16,6 @@ EOF
 
 chef_version '>= 12.1' if respond_to?(:chef_version)
 
-version '0.2.0'
+version '0.2.1'
 
 supports 'ubuntu'

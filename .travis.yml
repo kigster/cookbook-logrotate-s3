@@ -22,3 +22,5 @@ before_script:
 - berks
 script:
 - chef exec rspec
+- chef exec cookstyle
+- chef exec foodcritic .

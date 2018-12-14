@@ -6,5 +6,5 @@ logrotate_s3_file 'nginx' do
   s3_bucket 'rotated-logs'
   upload_to_s3 true
   action :run
-  only_if { node['logrotate-s3']['nginx']['enabled']}
+  only_if { node['logrotate-s3']['nginx']['enabled'] }
 end

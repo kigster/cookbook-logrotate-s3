@@ -12,7 +12,7 @@
     <%- Array(@resource.log_pattern).each do |pattern| %>
     /bin/gzip --fast <%= @resource.log_dir %>/<%= pattern %>.[0-9]*.[0-9]*
     <%- end %>
-    /usr/bin/s3cmd sync --config=<%= @resource.s3_config %> <%= @resource.log_dir %>/*.gz "s3://<%= @resource.s3_bucket %>/<%= @resource.s3_folder %>/<%= @resource.log_name %>/" && rm -f <%= @resource.log_dir %>/*.gz
+    /usr/bin/s3cmd sync --config=<%= @resource.s3_config %> <%= @resource.log_dir %>/*.gz <%= @s3_destination %>&& rm -f <%= @resource.log_dir %>/*.gz
     <%= @resource.last_action if @resource.last_action %>
   endscript
   <%- elsif @resource.last_action %>

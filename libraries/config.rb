@@ -10,7 +10,7 @@ module LogrotateS3Cookbook
     property :s3_secret_key, String, required: true
 
     action :run do
-      resource = new_resource
+      resource   = new_resource
       config_dir = ::File.dirname(resource.config_file)
 
       directory config_dir
@@ -19,7 +19,6 @@ module LogrotateS3Cookbook
         package 's3cmd'
 
         directory config_dir do
-          action :create
           not_if "test -d #{config_dir}"
         end
 
@@ -27,9 +26,9 @@ module LogrotateS3Cookbook
           source 'logrotate_s3_config.erb'
           cookbook 'logrotate-s3'
           variables(
-              s3_access_key: resource.s3_access_key,
-              s3_secret_key: resource.s3_secret_key,
-              s3_aws_region: resource.s3_aws_region
+            s3_access_key: resource.s3_access_key,
+            s3_secret_key: resource.s3_secret_key,
+            s3_aws_region: resource.s3_aws_region
           )
         end
       end
